@@ -14,15 +14,13 @@
   "icon": "assets/hotbarsplus-legacy/icon.png",
   "environment": "client",
   "entrypoints": {
-    "client": ["me.videogamesm12.hotbarsplus.legacy.HotbarsPlus"],
-    "cotton-client-commands": ["me.videogamesm12.hotbarsplus.legacy.manager.CommandManager"]
+    "client": ["me.videogamesm12.hotbarsplus.legacy.HotbarsPlus"]
   },
   "mixins": [
     "hotbarsplus.legacy.mixins.json"
   ],
   "depends": {
-    "minecraft": ["1.14.x", "1.15.x"],
-    "cotton-client-commands": "*"
+    "minecraft": ["1.12.2"]
   },
   "custom": {
     "modmenu:api": true,

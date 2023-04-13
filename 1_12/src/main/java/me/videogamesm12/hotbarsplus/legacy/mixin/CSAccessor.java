@@ -17,11 +17,11 @@
 
 package me.videogamesm12.hotbarsplus.legacy.mixin;
 
-import net.minecraft.client.gui.screen.ingame.ContainerScreen;
+import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
-@Mixin(ContainerScreen.class)
+@Mixin(HandledScreen.class)
 public interface CSAccessor
 {
     @Accessor("x")

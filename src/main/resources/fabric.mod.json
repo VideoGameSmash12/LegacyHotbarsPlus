@@ -25,8 +25,8 @@
     "hotbarsplus.mixin.json"
   ],
   "depends": {
-    "fabric": "*",
-    "minecraft": ">=1.14.4"
+    "legacy-fabric-api": "*",
+    "minecraft": ">=1.12.2"
   },
   "accessWidener": "hotbarsplus.accesswidener",
   "breaks": {

@@ -5,10 +5,12 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "HotbarStorageMixin",
-    "HotbarStorageMixin$HSAccessor",
-    "MinecraftClientMixin"
+    "HotbarStorageMixin$HSAccessor"
   ],
   "injectors": {
     "defaultRequire": 1
-  }
+  },
+  "client": [
+    "CreativeInventoryScreenMixin"
+  ]
 }

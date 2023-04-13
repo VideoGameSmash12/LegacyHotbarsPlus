@@ -19,15 +19,13 @@ package me.videogamesm12.hotbarsplus.legacy;
 
 import me.videogamesm12.hotbarsplus.api.event.navigation.HotbarNavigateEvent;
 import me.videogamesm12.hotbarsplus.core.HBPCore;
-import me.videogamesm12.hotbarsplus.legacy.manager.CommandManager;
-import me.videogamesm12.hotbarsplus.legacy.manager.CustomToastManager;
 import me.videogamesm12.hotbarsplus.legacy.manager.KeybindManager;
 import me.videogamesm12.hotbarsplus.legacy.mixin.CreativeInvScreenMixin;
 import net.fabricmc.api.ClientModInitializer;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.ingame.CreativeInventoryScreen;
-import net.minecraft.item.ItemGroup;
+import net.minecraft.item.itemgroup.ItemGroup;
 import net.minecraft.util.ActionResult;
 
 import java.math.BigInteger;
@@ -38,9 +36,6 @@ public class HotbarsPlus implements ClientModInitializer, HotbarNavigateEvent
     public void onInitializeClient()
     {
         HBPCore.KEYBINDS = new KeybindManager();
-        HBPCore.COMMANDS = new CommandManager();
-        HBPCore.TOASTS = new CustomToastManager();
-        HBPCore.VHOOKS = new FourteenHooks();
         //--
         HotbarNavigateEvent.EVENT.register(this);
     }
@@ -53,9 +48,9 @@ public class HotbarsPlus implements ClientModInitializer, HotbarNavigateEvent
         {
             Screen screen = MinecraftClient.getInstance().currentScreen;
 
-            if (((CreativeInvScreenMixin.CISAccessor) screen).getSelectedTab() == ItemGroup.HOTBAR.getIndex())
+            if (((CreativeInvScreenMixin.CISAccessor) screen).getSelectedTab() == ItemGroup.field_15657.getIndex())
             {
-                ((CreativeInvScreenMixin.CISAccessor) screen).setSelectedTab(ItemGroup.HOTBAR);
+                ((CreativeInvScreenMixin.CISAccessor) screen).setSelectedTab(ItemGroup.field_15657);
             }
         }
 

@@ -17,13 +17,9 @@
 
 package me.videogamesm12.hotbarsplus.core.mixin;
 
-import com.mojang.datafixers.DataFixer;
-import me.videogamesm12.hotbarsplus.core.HotbarsPlusStorage;
-import net.minecraft.client.option.HotbarStorage;
+import net.minecraft.class_3251;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
-import org.spongepowered.asm.mixin.injection.*;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.io.File;
 
@@ -31,31 +27,16 @@ import java.io.File;
  * <b>HotbarStorageMixin</b>
  * <p>Controls where hotbar files are stored.</p>
  */
-@Mixin(HotbarStorage.class)
+@Mixin(class_3251.class)
 public class HotbarStorageMixin
 {
-    /**
-     * <p>Hijacks what is used as the location by HotbarStorage on initialization.</p>
-     * @param ci        CallbackInfo
-     * @param dataFixer DataFixer
-     * @param file      File
-     */
-    @Inject(method = "<init>", at = @At(value = "TAIL"))
-    private void inject(File file, DataFixer dataFixer, CallbackInfo ci)
-    {
-        if (HotbarsPlusStorage.class.isAssignableFrom(getClass()))
-        {
-            ((HSAccessor) this).setFile(file);
-        }
-    }
-
-    @Mixin(HotbarStorage.class)
+    @Mixin(class_3251.class)
     public interface HSAccessor
     {
-        @Accessor
+        @Accessor(value = "field_15864")
         File getFile();
 
-        @Accessor
+        @Accessor(value = "field_15864")
         void setFile(File file);
     }
 }

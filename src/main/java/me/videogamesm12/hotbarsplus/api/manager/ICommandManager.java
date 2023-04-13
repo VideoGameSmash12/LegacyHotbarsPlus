@@ -17,8 +17,6 @@
 
 package me.videogamesm12.hotbarsplus.api.manager;
 
-import com.mojang.brigadier.tree.LiteralCommandNode;
-
 /**
  * <h1>ICommandManager</h1>
  * <p>Interface for version-specific implementations of client commands.</p>
@@ -30,6 +28,4 @@ public interface ICommandManager<T>
      * Registers all the mod's commands.
      */
     void register();
-
-    LiteralCommandNode<T> getCommandNode();
 }

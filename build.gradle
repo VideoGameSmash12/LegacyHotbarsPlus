@@ -13,6 +13,10 @@ repositories {
     maven { url "https://jitpack.io" }
 }
 
+loom {
+    setIntermediaryUrl('https://repo.legacyfabric.net/repository/legacyfabric/net/legacyfabric/intermediary/%1$s/intermediary-%1$s-v2.jar');
+}
+
 dependencies {
     minecraft "com.mojang:minecraft:1.12.2"
     mappings "net.legacyfabric:yarn:1.12.2+build.458:v2"
@@ -34,9 +38,9 @@ test {
     useJUnitPlatform()
 }
 
-loom {
-    accessWidenerPath = file("src/main/resources/hotbarsplus.accesswidener")
-}
+//loom {
+//    accessWidenerPath = file("src/main/resources/hotbarsplus.accesswidener")
+//}
 
 allprojects {
     apply plugin: 'fabric-loom'
@@ -48,9 +52,6 @@ allprojects {
     }
 
     repositories {
-        maven {
-            url "https://maven.shedaniel.me/"
-        }
         maven {
             url "https://jitpack.io"
         }

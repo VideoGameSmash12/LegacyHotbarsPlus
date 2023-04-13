@@ -42,7 +42,6 @@ public class HBPCore implements ClientModInitializer
 
     // VERSION SPECIFIC
     public static IKeybindManager<?> KEYBINDS = null;
-    public static ICommandManager<?> COMMANDS = null;
     public static IToastManager TOASTS = null;
     public static IVersionHook VHOOKS = null;
 

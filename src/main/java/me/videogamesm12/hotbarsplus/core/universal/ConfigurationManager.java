@@ -25,7 +25,7 @@ import me.videogamesm12.hotbarsplus.api.config.Configuration;
 import me.videogamesm12.hotbarsplus.api.event.navigation.HotbarNavigateEvent;
 import me.videogamesm12.hotbarsplus.api.event.notification.NotificationTypeRegistered;
 import me.videogamesm12.hotbarsplus.core.HBPCore;
-import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLifecycleEvents;
+import net.legacyfabric.fabric.api.client.event.lifecycle.v1.ClientLifecycleEvents;
 import net.minecraft.client.MinecraftClient;
 
 import javax.naming.ConfigurationException;

@@ -21,35 +21,32 @@ import me.videogamesm12.hotbarsplus.api.event.keybind.BackupBindPressEvent;
 import me.videogamesm12.hotbarsplus.api.event.keybind.NextBindPressEvent;
 import me.videogamesm12.hotbarsplus.api.event.keybind.PreviousBindPressEvent;
 import me.videogamesm12.hotbarsplus.core.HBPCore;
-import me.videogamesm12.hotbarsplus.legacy.gui.CustomButtons;
+import me.videogamesm12.hotbarsplus.core.gui.CustomButtons;
 import me.videogamesm12.hotbarsplus.legacy.manager.KeybindManager;
-import net.minecraft.client.gui.screen.ingame.AbstractInventoryScreen;
 import net.minecraft.client.gui.screen.ingame.CreativeInventoryScreen;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.text.Text;
+import net.minecraft.client.gui.screen.ingame.InventoryScreen;
+import net.minecraft.item.itemgroup.ItemGroup;
+import net.minecraft.screen.ScreenHandler;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.gen.Accessor;
 import org.spongepowered.asm.mixin.gen.Invoker;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(CreativeInventoryScreen.class)
-public abstract class CreativeInvScreenMixin extends AbstractInventoryScreen<CreativeInventoryScreen.CreativeContainer>
+public abstract class CreativeInvScreenMixin extends InventoryScreen
         implements CSAccessor
 {
     public CustomButtons.NextButton next;
     public CustomButtons.BackupButton backup;
     public CustomButtons.PreviousButton previous;
+    //--
+    private boolean pressed = false;
 
-    @Shadow private boolean field_2888;
-
-    public CreativeInvScreenMixin(CreativeInventoryScreen.CreativeContainer container, PlayerInventory playerInventory, Text text)
+    public CreativeInvScreenMixin(ScreenHandler screenHandler)
     {
-        super(container, playerInventory, text);
+        super(screenHandler);
     }
 
     @Inject(method = "init", at = @At("RETURN"))
@@ -65,7 +62,7 @@ public abstract class CreativeInvScreenMixin extends AbstractInventoryScreen<Cre
         this.previous = new CustomButtons.PreviousButton(x - 16, y);
 
         // Modify buttons to adjust for the currently selected tab
-        if (((CISAccessor) this).getSelectedTab() != ItemGroup.HOTBAR.getIndex())
+        if (((CISAccessor) this).getSelectedTab() != ItemGroup.field_15657.getIndex())
         {
             next.visible = false;
             backup.visible = false;
@@ -86,7 +83,7 @@ public abstract class CreativeInvScreenMixin extends AbstractInventoryScreen<Cre
     {
         if (next != null && backup != null && previous != null)
         {
-            if (group == ItemGroup.HOTBAR)
+            if (group == ItemGroup.field_15657)
             {
                 next.visible = true;
                 backup.visible = true;
@@ -104,29 +101,29 @@ public abstract class CreativeInvScreenMixin extends AbstractInventoryScreen<Cre
     }
 
     @Inject(method = "keyPressed", at = @At(value = "HEAD", shift = At.Shift.AFTER), cancellable = true)
-    public void injectKeyPressed(int keyCode, int scanCode, int modifiers, CallbackInfoReturnable<Boolean> cir)
+    public void injectKeyPressed(char id, int code, CallbackInfo ci)
     {
-        if (((CISAccessor) this).getSelectedTab() == ItemGroup.HOTBAR.getIndex())
+        if (((CISAccessor) this).getSelectedTab() == ItemGroup.field_15657.getIndex())
         {
             KeybindManager manager = (KeybindManager) HBPCore.KEYBINDS;
 
-            if (manager.next.matchesKey(keyCode, scanCode))
+            if (manager.next.getCode() == code)
             {
                 NextBindPressEvent.EVENT.invoker().onNextPress();
-                field_2888 = true;
-                cir.setReturnValue(true);
+                pressed = true;
+                ci.cancel();
             }
-            else if (manager.backup.matchesKey(keyCode, scanCode))
+            else if (manager.backup.getCode() == code)
             {
                 BackupBindPressEvent.EVENT.invoker().onBackupPress();
-                field_2888 = true;
-                cir.setReturnValue(true);
+                pressed = true;
+                ci.cancel();
             }
-            else if (manager.previous.matchesKey(keyCode, scanCode))
+            else if (manager.previous.getCode() == code)
             {
                 PreviousBindPressEvent.EVENT.invoker().onPreviousPress();
-                field_2888 = true;
-                cir.setReturnValue(true);
+                pressed = true;
+                ci.cancel();
             }
         }
     }

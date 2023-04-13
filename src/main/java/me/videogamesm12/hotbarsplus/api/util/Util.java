@@ -65,12 +65,8 @@ public class Util
      */
     public static Text advToNative(Component component)
     {
-        JsonElement element = kyori.serializeToTree(component);
-
-        if (HBPCore.VHOOKS != null)
-            return HBPCore.VHOOKS.convertFromJson(element);
-        else
-            return Text.Serializer.fromJson(element);
+        String element = kyori.serialize(component);
+        return Text.Serializer.deserializeText(element);
     }
 
     public static void msg(Component component)

@@ -20,10 +20,11 @@ package me.videogamesm12.hotbarsplus.core.universal;
 import me.videogamesm12.hotbarsplus.api.event.keybind.NextBindPressEvent;
 import me.videogamesm12.hotbarsplus.api.event.keybind.PreviousBindPressEvent;
 import me.videogamesm12.hotbarsplus.api.event.navigation.HotbarNavigateEvent;
+import me.videogamesm12.hotbarsplus.api.util.Util;
 import me.videogamesm12.hotbarsplus.core.HotbarsPlusStorage;
 import me.videogamesm12.hotbarsplus.core.mixin.HotbarStorageMixin;
+import net.minecraft.class_3251;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.option.HotbarStorage;
 
 import java.math.BigInteger;
 import java.util.HashMap;
@@ -35,7 +36,7 @@ import java.util.Map;
  */
 public class PageManager implements NextBindPressEvent, PreviousBindPressEvent
 {
-    private final Map<BigInteger, HotbarStorage> cache = new HashMap<>();
+    private final Map<BigInteger, class_3251> cache = new HashMap<>();
     private BigInteger currentPage = BigInteger.valueOf(0);
 
     public PageManager()
@@ -67,7 +68,7 @@ public class PageManager implements NextBindPressEvent, PreviousBindPressEvent
         currentPage = page;
     }
 
-    public Map<BigInteger, HotbarStorage> getCache()
+    public Map<BigInteger, class_3251> getCache()
     {
         return cache;
     }
@@ -82,13 +83,13 @@ public class PageManager implements NextBindPressEvent, PreviousBindPressEvent
         return currentPage;
     }
 
-    public HotbarStorage getHotbarPage(BigInteger page)
+    public class_3251 getHotbarPage(BigInteger page)
     {
         // Get from disk if not cached in memory
         if (!cache.containsKey(page))
         {
-            HotbarStorage storage = page.equals(BigInteger.ZERO) ?
-                    new HotbarStorage(MinecraftClient.getInstance().runDirectory, MinecraftClient.getInstance().getDataFixer()) :
+            class_3251 storage = page.equals(BigInteger.ZERO) ?
+                    new class_3251(MinecraftClient.getInstance(), Util.getHotbarFile(page)) :
                     new HotbarsPlusStorage(page);
 
             cache.put(page, storage);
@@ -97,14 +98,14 @@ public class PageManager implements NextBindPressEvent, PreviousBindPressEvent
         return cache.get(page);
     }
 
-    public HotbarStorage getHotbarPage()
+    public class_3251 getHotbarPage()
     {
         return getHotbarPage(currentPage);
     }
 
     public boolean hotbarPageExists()
     {
-        return ((HotbarStorageMixin.HSAccessor) getHotbarPage()).getFile().exists();
+        return Util.getHotbarFile(currentPage).exists();
     }
 
     @Override

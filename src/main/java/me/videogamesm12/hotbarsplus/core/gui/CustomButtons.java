@@ -17,26 +17,15 @@
 
 package me.videogamesm12.hotbarsplus.core.gui;
 
-import me.videogamesm12.hotbarsplus.core.HBPCore;
 import net.minecraft.client.gui.widget.ButtonWidget;
-import net.minecraft.text.LiteralText;
-import net.minecraft.text.Style;
-import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
-import net.minecraft.util.Identifier;
 
 public class CustomButtons
 {
     public static class BackupButton extends ButtonWidget
     {
-        public static Text label = new LiteralText("\uD83D\uDCBE").setStyle(Style.EMPTY.withFont(
-                new Identifier("hotbarsplus", "default")));
-
         public BackupButton(int x, int y)
         {
-            super(x, y, 16, 12, label,
-                    (button) -> HBPCore.UBL.backupHotbar(),
-                    (button, stack, mx, my) -> new TranslatableText("gui.hotbarsplus.cis.backup_button.tooltip"));
+            super(42069, x, y, 16, 12, "\uD83D\uDCBE");
         }
     }
 
@@ -44,8 +33,7 @@ public class CustomButtons
     {
         public NextButton(int x, int y)
         {
-            super(x, y, 16, 12, new LiteralText("→"), (button) -> HBPCore.UPL.incrementPage(),
-                    (button, stack, mx, my) -> new TranslatableText("gui.hotbarsplus.cis.next_button.tooltip"));
+            super(1337, x, y, 16, 12, "→");
         }
     }
 
@@ -53,8 +41,7 @@ public class CustomButtons
     {
         public PreviousButton(int x, int y)
         {
-            super(x, y, 16, 12, new LiteralText("←"), (button) -> HBPCore.UPL.decrementPage(),
-                    (button, stack, mx, my) -> new TranslatableText("gui.hotbarsplus.cis.previous_button.tooltip"));
+            super(1338, x, y, 16, 12, "←");
         }
     }
 }

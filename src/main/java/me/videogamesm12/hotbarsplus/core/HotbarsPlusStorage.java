@@ -20,18 +20,17 @@ package me.videogamesm12.hotbarsplus.core;
 import lombok.Getter;
 import me.videogamesm12.hotbarsplus.api.IHotbarsPlusStorage;
 import me.videogamesm12.hotbarsplus.api.util.Util;
+import net.minecraft.class_3251;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.option.HotbarStorage;
-
 import java.math.BigInteger;
 
-public class HotbarsPlusStorage extends HotbarStorage implements IHotbarsPlusStorage
+public class HotbarsPlusStorage extends class_3251 implements IHotbarsPlusStorage
 {
     @Getter
     private BigInteger page;
 
     public HotbarsPlusStorage(BigInteger page)
     {
-        super(Util.getHotbarFile(page), MinecraftClient.getInstance().getDataFixer());
+        super(MinecraftClient.getInstance(), Util.getHotbarFile(page));
     }
 }

@@ -34,6 +34,6 @@ public class NotificationRouteProvider implements INotificationRouteProvider
     @Override
     public List<Class<? extends NotificationManager.NotificationRoute>> getNotificationRoutes()
     {
-        return Arrays.asList(ActionBarNotification.class, ToastNotification.class);
+        return Arrays.asList(ActionBarNotification.class);
     }
 }

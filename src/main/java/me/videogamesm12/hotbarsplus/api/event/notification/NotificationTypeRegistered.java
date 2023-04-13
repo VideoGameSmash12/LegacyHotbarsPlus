@@ -18,9 +18,8 @@
 package me.videogamesm12.hotbarsplus.api.event.notification;
 
 import me.videogamesm12.hotbarsplus.core.universal.NotificationManager;
-import net.fabricmc.fabric.api.event.Event;
-import net.fabricmc.fabric.api.event.EventFactory;
-
+import net.legacyfabric.fabric.api.event.Event;
+import net.legacyfabric.fabric.api.event.EventFactory;
 import java.util.Arrays;
 
 /**
